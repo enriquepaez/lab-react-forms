@@ -2,33 +2,21 @@ import { useState } from "react";
 
 function AddStudent({setStudents}) {
 
-  const [ fullName, setFullName ] = useState("");
-  const [ image, setImage ] = useState("");
-  const [ phone, setPhone ] = useState("");
-  const [ email, setEmail ] = useState("");
-  const [ program, setProgram ] = useState("None");
-  const [ graduationYear, setGraduationYear ] = useState(2024);
-  const [ graduated, setGraduated ] = useState(false);
+  const [ student, setStudent ] = useState({fullName: "", image: "", phone: "", email: "", program: "None", graduationYear: 2024, graduated: false});
 
-  const handleFullNameChange = (event) => setFullName(event.target.value)
-  const handleImageChange = (event) => setImage(event.target.value)
-  const handlePhoneChange = (event) => setPhone(event.target.value)
-  const handleEmailChange = (event) => setEmail(event.target.value)
-  const handleProgramChange = (event) => setProgram(event.target.value)
-  const handleGraduationYearChange = (event) => setGraduationYear(event.target.value)
-  const handleGraduatedChange = (event) => setGraduated(event.target.value)
+  const handleChange = (event) => setStudent({...student, [event.target.name]: event.target.value})
 
   const handleAddStudent = (event) => {
     event.preventDefault()
 
     const newStudent = {
-      fullName: fullName,
-      image: image,
-      phone: phone,
-      email: email,
-      program: program,
-      graduationYear: graduationYear,
-      graduated: graduated
+      fullName: student.fullName,
+      image: student.image,
+      phone: student.phone,
+      email: student.email,
+      program: student.program,
+      graduationYear: student.graduationYear,
+      graduated: student.graduated
     }
     
     setStudents((current) => [newStudent, ...current])
@@ -40,14 +28,14 @@ function AddStudent({setStudents}) {
       <div>
         <label>
           Full Name
-          <input onChange={handleFullNameChange} value={fullName} name="fullName" type="text" placeholder="Full Name" />
+          <input onChange={handleChange} value={student.fullName} name="fullName" type="text" placeholder="Full Name" />
         </label>
 
         <label>
           Profile Image
           <input
-            onChange={handleImageChange}
-            value={image}
+            onChange={handleChange}
+            value={student.image}
             name="image"
             type="url"
             placeholder="Profile Image"
@@ -57,8 +45,8 @@ function AddStudent({setStudents}) {
         <label>
           Phone
           <input
-            onChange={handlePhoneChange}
-            value={phone}
+            onChange={handleChange}
+            value={student.phone}
             name="phone"
             type="tel"
             placeholder="Phone"
@@ -68,8 +56,8 @@ function AddStudent({setStudents}) {
         <label>
           Email
           <input
-            onChange={handleEmailChange}
-            value={email}
+            onChange={handleChange}
+            value={student.email}
             name="email"
             type="email"
             placeholder="Email"
@@ -81,8 +69,8 @@ function AddStudent({setStudents}) {
         <label>
           Program
           <select
-            onChange={handleProgramChange}
-            checked={program}
+            onChange={handleChange}
+            checked={student.program}
             name="program"
           >
             <option value="">-- None --</option>
@@ -95,8 +83,8 @@ function AddStudent({setStudents}) {
         <label>
           Graduation Year
           <input
-            onChange={handleGraduationYearChange}
-            value={graduationYear}
+            onChange={handleChange}
+            value={student.graduationYear}
             name="graduationYear"
             type="number"
             placeholder="Graduation Year"
@@ -110,8 +98,8 @@ function AddStudent({setStudents}) {
         <label>
           Graduated
           <input
-            onChange={handleGraduatedChange}
-            value={graduated}
+            onChange={handleChange}
+            value={student.graduated}
             name="graduated"
             type="checkbox"
           />
